@@ -1,32 +1,29 @@
-// Unsolved
 #include <bits/stdc++.h>
 using namespace std;
 
 int main()
 {
-    long long nv, nq, i, j, res = 0;
-    cin >> nv >> nq;
-    long long a[nq], b[nq], v[nv];
-    for (i = 0; i < nv; i++)
+    int i, num, queries, a, b;
+    cin >> num >> queries;
+
+    long long prefix_sum[num];
+    long long res[queries];
+    long long x;
+
+    for (i = 1; i <= num; ++i)
     {
-        cin >> v[i];
+        cin >> x;
+        prefix_sum[i] = prefix_sum[i-1] + x;
     }
-    for (i = 0; i < nq; i++)
+
+    for (i = 0; i < queries; ++i)
     {
-        cin >> a[i] >> b[i];
+        cin >> a >> b;
+        res[i] = prefix_sum[b] - prefix_sum[a-1];
     }
 
-    for (i = 0; i < nq; i++)
+    for (i = 0; i < queries; ++i)
     {
-        res = 0;
-        int initial = a[i];
-        int final = b[i];
-
-        for (j = initial - 1; j <= final - 1; j++)
-        {
-            res = res + v[j];
-        }
-
-        cout << res << endl;
+        cout << res[i] << endl;
     }
 }
